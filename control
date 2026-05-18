@@ -1,0 +1,6 @@
+Package: com.local.notfnag
+Name: NoTFNag
+Version: 1.0.0
+Architecture: iphoneos-arm64
+Description: Removes Instagram TestFlight update nag popup
+Author: local
