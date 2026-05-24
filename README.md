@@ -49,7 +49,3 @@ The Makefile automatically rewrites the CydiaSubstrate load path to `@executable
 ## Injecting
 
 Add `NoIGBetaNag.dylib` to the Instagram IPA's `Frameworks/` directory alongside `CydiaSubstrate.framework` and inject an `LC_LOAD_DYLIB` load command pointing to `@executable_path/Frameworks/NoIGBetaNag.dylib`.
-
-## License
-
-MIT
