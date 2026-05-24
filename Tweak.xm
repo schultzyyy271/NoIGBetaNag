@@ -4,10 +4,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-// ============================================================
-// SECTION 1: TestFlight Beta Update Nag
-// ============================================================
 
+// SECTION 1: TestFlight Beta Update Nag
 %hook IGTestFlightNagController
 - (id)init { return nil; }
 %end
@@ -40,10 +38,8 @@
 - (BOOL)shouldGate { return NO; }
 %end
 
-// ============================================================
-// SECTION 2: "Introducing Instants" DM walkthrough popup
-// ============================================================
 
+// SECTION 2: "Introducing Instants" DM walkthrough popup
 // Report walkthrough as already seen so it never triggers
 %hook IGQuickSnapNuxStore
 - (BOOL)hasSeenWalkthroughNux { return YES; }
@@ -51,10 +47,8 @@
 - (BOOL)hasSeenDirectDialogNux { return YES; }
 %end
 
-// ============================================================
-// SECTION 3: Catch-all presentation blocker
-// ============================================================
 
+// SECTION 3: Catch-all presentation blocker
 %hook UIViewController
 - (void)presentViewController:(UIViewController *)vc animated:(BOOL)flag completion:(id)completion {
     NSString *cls = NSStringFromClass([vc class]);
