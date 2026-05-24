@@ -1,9 +1,13 @@
 // NoIGBetaNag - Kill Instagram TestFlight "update beta" popup
+//             & "Introducing Instants" DM nag popup
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-// ObjC classes
+// ============================================================
+// SECTION 1: TestFlight Beta Update Nag
+// ============================================================
+
 %hook IGTestFlightNagController
 - (id)init { return nil; }
 %end
@@ -36,11 +40,27 @@
 - (BOOL)shouldGate { return NO; }
 %end
 
-// Block any UIViewController presentation with "TestFlight" in the class name
+// ============================================================
+// SECTION 2: "Introducing Instants" DM walkthrough popup
+// ============================================================
+
+// Report walkthrough as already seen so it never triggers
+%hook IGQuickSnapNuxStore
+- (BOOL)hasSeenWalkthroughNux { return YES; }
+- (BOOL)hasSeenNux { return YES; }
+- (BOOL)hasSeenDirectDialogNux { return YES; }
+%end
+
+// ============================================================
+// SECTION 3: Catch-all presentation blocker
+// ============================================================
+
 %hook UIViewController
 - (void)presentViewController:(UIViewController *)vc animated:(BOOL)flag completion:(id)completion {
     NSString *cls = NSStringFromClass([vc class]);
-    if ([cls containsString:@"TestFlight"] || [cls containsString:@"testflight"] || [cls containsString:@"UpdateNudge"]) {
+    if ([cls containsString:@"TestFlight"] ||
+        [cls containsString:@"testflight"] ||
+        [cls containsString:@"UpdateNudge"]) {
         if (completion) ((void(^)(void))completion)();
         return;
     }
