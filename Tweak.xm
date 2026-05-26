@@ -39,7 +39,6 @@
 %end
 
 
-
 // SECTION 2: Catch-all presentation blocker
 %hook UIViewController
 - (void)presentViewController:(UIViewController *)vc animated:(BOOL)flag completion:(id)completion {
